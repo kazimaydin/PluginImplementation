@@ -1,0 +1,25 @@
+﻿@model List<PluginImplementation.Utils.IPlugin>
+
+@foreach (var item in Model)
+{
+    string dropdownClass = null;
+    if (item.Menu.Any()) { dropdownClass = "dropdown"; }
+
+    <li class="@dropdownClass">
+
+        @Html.ActionLink(item.MenuTitle, item.ActionName, item.ControllerName)
+
+        @if (item.Menu.Any())
+        {
+            <ul class="dropdown-menu">
+                @foreach (var subItem in item.Menu)
+                {
+                    <li><a href="#">@subItem</a></li>
+                }
+            </ul>
+        }
+
+    </li>
+}
+
+
