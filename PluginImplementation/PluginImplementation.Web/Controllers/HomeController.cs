@@ -14,9 +14,16 @@ namespace PluginImplementation.Web.Controllers
         public PartialViewResult _PluginMenuPartial()
         {
             string folder = Server.MapPath("/Plugins/");
-            List<IPlugin> list = Utility.GetPlugins<IPlugin>(folder);
+            List<IPlugin> list = Utility.GetPluginsFromCache(folder);
 
             return PartialView(list);
+        }
+
+        public ActionResult RemoveCache()
+        {
+            Utility.RemoveFromCacheForActivator();
+
+            return Redirect("/");
         }
 
         public ActionResult About()
